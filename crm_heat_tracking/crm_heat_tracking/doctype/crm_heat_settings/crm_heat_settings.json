@@ -1,0 +1,174 @@
+{
+ "actions": [],
+ "creation": "2026-10-16 12:00:00.000000",
+ "description": "How leads are scored: fit and activity rules, Hot/Warm thresholds and engagement decay.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "track_email_clicks",
+  "notify_owner_on_hot",
+  "column_break_general",
+  "website_lead_sources",
+  "thresholds_section",
+  "hot_engagement",
+  "hot_fit",
+  "column_break_thresholds",
+  "warm_engagement",
+  "warm_fit",
+  "column_break_decay",
+  "half_life_days",
+  "fit_weight",
+  "fit_section",
+  "fit_rules",
+  "activity_section",
+  "activity_rules"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "description": "Score leads and update their heat.",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "default": "1",
+   "description": "Rewrite links in emails sent from a lead or deal so clicks are recorded. Opens are tracked by the Email Account's Track Email Status.",
+   "fieldname": "track_email_clicks",
+   "fieldtype": "Check",
+   "label": "Track Email Clicks"
+  },
+  {
+   "default": "1",
+   "fieldname": "notify_owner_on_hot",
+   "fieldtype": "Check",
+   "label": "Notify Lead Owner When Hot"
+  },
+  {
+   "fieldname": "column_break_general",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Website",
+   "description": "Lead sources (one per line) that mean the lead submitted a form; their creation counts as a Form Submission.",
+   "fieldname": "website_lead_sources",
+   "fieldtype": "Small Text",
+   "label": "Website Lead Sources"
+  },
+  {
+   "description": "Hot: engagement and fit both at or above their Hot thresholds. Warm: engagement or fit at or above its Warm threshold. Cold: everything else.",
+   "fieldname": "thresholds_section",
+   "fieldtype": "Section Break",
+   "label": "Heat"
+  },
+  {
+   "default": "50",
+   "fieldname": "hot_engagement",
+   "fieldtype": "Int",
+   "label": "Hot: Engagement At Least",
+   "non_negative": 1
+  },
+  {
+   "default": "40",
+   "fieldname": "hot_fit",
+   "fieldtype": "Int",
+   "label": "Hot: Fit At Least",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_thresholds",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "20",
+   "fieldname": "warm_engagement",
+   "fieldtype": "Int",
+   "label": "Warm: Engagement At Least",
+   "non_negative": 1
+  },
+  {
+   "default": "60",
+   "fieldname": "warm_fit",
+   "fieldtype": "Int",
+   "label": "Warm: Fit At Least",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_decay",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "30",
+   "description": "Every activity's points halve after this many days.",
+   "fieldname": "half_life_days",
+   "fieldtype": "Float",
+   "label": "Engagement Half-Life (Days)"
+  },
+  {
+   "default": "40",
+   "description": "The lead's Heat Score is this share of fit plus the rest of engagement.",
+   "fieldname": "fit_weight",
+   "fieldtype": "Percent",
+   "label": "Fit Share of Score"
+  },
+  {
+   "description": "Who the lead is. Fields are CRM Lead field names (comma-separated: any of them), or $business_email, $email_bounced, $unsubscribed. Rules with the same Group give only their best match.",
+   "fieldname": "fit_section",
+   "fieldtype": "Section Break",
+   "label": "Fit Rules"
+  },
+  {
+   "fieldname": "fit_rules",
+   "fieldtype": "Table",
+   "label": "Fit Rules",
+   "options": "CRM Heat Fit Rule"
+  },
+  {
+   "description": "What the lead does. Points decay with the half-life. Page View rules with Path Patterns (e.g. contact, *-migration) apply to those pages instead of the plain Page View rule.",
+   "fieldname": "activity_section",
+   "fieldtype": "Section Break",
+   "label": "Activity Rules"
+  },
+  {
+   "fieldname": "activity_rules",
+   "fieldtype": "Table",
+   "label": "Activity Rules",
+   "options": "CRM Heat Activity Rule"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-16 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "CRM Heat Tracking",
+ "name": "CRM Heat Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Sales Manager",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Sales User",
+   "write": 0
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

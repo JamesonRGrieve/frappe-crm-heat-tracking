@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "creation": "2026-10-16 12:00:00.000000",
+ "description": "",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "label",
+  "fields",
+  "condition",
+  "match_values",
+  "points",
+  "rule_group"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "fields",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Fields",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "default": "Is Set",
+   "fieldname": "condition",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Condition",
+   "options": "Is Set\nEquals\nContains Any\nAt Least",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "description": "One per line. At Least uses the first, as a number.",
+   "fieldname": "match_values",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Values"
+  },
+  {
+   "columns": 1,
+   "fieldname": "points",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Points",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "rule_group",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Group"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-16 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "CRM Heat Tracking",
+ "name": "CRM Heat Fit Rule",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
