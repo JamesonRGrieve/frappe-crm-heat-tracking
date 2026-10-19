@@ -106,13 +106,18 @@ class TestCRMHeat(IntegrationTestCase):
 				"reference_name": lead.name,
 			}
 		).insert(ignore_permissions=True)
-		self.assertEqual(comm.content, content)
+		# Frappe's sanitizer may add attributes (rel="noopener noreferrer"); the link itself must not be rewritten.
+		self.assertIn('href="https://omg.example/x"', comm.content)
+		self.assertNotIn(email_tracking.CLICK_PATH, comm.content)
+		self.assertFalse(frappe.db.exists(email_tracking.LINK, {"lead": lead.name}))
 
 	def test_scores_decay_in_the_daily_pass(self):
 		lead = self.make_lead(source=SITE_SOURCE)
-		frappe.db.set_value("CRM Lead", lead.name, "creation", now_datetime() - timedelta(days=60))
+		# One half-life: the 30-point form submission is worth 15. (Two half-lives land exactly on 7.5, where the
+		# moments between setting creation and scoring tip the rounding to 7.)
+		frappe.db.set_value("CRM Lead", lead.name, "creation", now_datetime() - timedelta(days=30))
 		heat.update_all_leads()
-		self.assertEqual(frappe.db.get_value("CRM Lead", lead.name, "heat_engagement"), 8)
+		self.assertEqual(frappe.db.get_value("CRM Lead", lead.name, "heat_engagement"), 15)
 
 	def test_rejects_unknown_fields_and_misplaced_patterns(self):
 		settings = frappe.get_single(heat.SETTINGS)
